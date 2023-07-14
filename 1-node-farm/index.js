@@ -38,8 +38,10 @@ const dataObj = JSON.parse(data);
 
 // req - request, res - response
 const server = http.createServer((req, res) => {
+  // URL
   const pathName = req.url;
 
+  // Handle routing
   if (pathName === '/' || pathName === '/overview') {
     res.end('This is the OVERVIEW');
   } else if (pathName === '/product') {
