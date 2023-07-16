@@ -68,12 +68,23 @@ const dataObj = JSON.parse(data);
 
 // req - request, res - response
 const server = http.createServer((req, res) => {
-  // URL
-  const pathName = req.url;
+  // DEPRECATED /////////
+  // const { query, pathname } = url.parse(req.url, true);
+  ///////////////////////
+
+  const baseURL = `http://${req.headers.host}`;
+  const requestURL = new URL(req.url, baseURL);
+  // requestURL variable contains the absolute URL.
+  // In this case it's http://localhost:8000/product?id=1
+  // Get the path name from URL: /product
+  const pathname = requestURL.pathname;
+  // Get the query from the URL.
+  const query = requestURL.searchParams.get('id');
+  // .searchParams returns this: URLSearchParams { 'id' => '1' }
 
   // Handle routing
   // Overview page
-  if (pathName === '/' || pathName === '/overview') {
+  if (pathname === '/' || pathname === '/overview') {
     res.writeHead(200, { 'Content-type': 'text/html' });
 
     const cardsHtml = dataObj
@@ -84,11 +95,15 @@ const server = http.createServer((req, res) => {
     res.end(output);
 
     // Product page
-  } else if (pathName === '/product') {
-    res.end('This is the PRODUCT');
+  } else if (pathname === '/product') {
+    res.writeHead(200, { 'Content-type': 'text/html' });
+    const product = dataObj[query];
+
+    const output = replaceTemplate(tempProduct, product);
+    res.end(output);
 
     // API
-  } else if (pathName === '/api') {
+  } else if (pathname === '/api') {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
 
