@@ -57,10 +57,10 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data);
 // Top level code ends here.
 
-const slugs = dataObj.map((elem) => slugify(elem.productName, { lower: true }));
-console.log(slugs);
+// const slugs = dataObj.map((elem) => slugify(elem.productName, { lower: true }));
+// console.log(slugs);
 
-console.log(slugify('Fresh Avocados', { lower: true }));
+// console.log(slugify('Fresh Avocados', { lower: true }));
 
 // req - request, res - response
 const server = http.createServer((req, res) => {
@@ -78,6 +78,7 @@ const server = http.createServer((req, res) => {
   const query = requestURL.searchParams.get('id');
   // .searchParams returns this: URLSearchParams { 'id' => '1' }
 
+  /////////////////////////////////////////////////////////////
   // Handle routing
   // Overview page
   if (pathname === '/' || pathname === '/overview') {
