@@ -1,12 +1,13 @@
 /////////////////////////////////////////////////////////////
-// MODULES
+// CORE MODULES
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
+// CUSTOM MODULES
+const replaceTemplate = require('./modules/replaceTemplate');
 
 /////////////////////////////////////////////////////////////
 // FILES
-
 // Blocking, synchronous way
 /* const textIn = fs.readFileSync('./txt/input.txt', 'utf-8');
 console.log(textIn);
@@ -35,20 +36,6 @@ console.log('File saved!'); */
 // SERVER
 /* This code is on the top level, it will only be executed
 once and won't be called every time there is a new request. */
-const replaceTemplate = (temp, product) => {
-  let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-  output = output.replace(/{%IMAGE%}/g, product.image);
-  output = output.replace(/{%PRICE%}/g, product.price);
-  output = output.replace(/{%FROM%}/g, product.from);
-  output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
-  output = output.replace(/{%QUANTITY%}/g, product.quantity);
-  output = output.replace(/{%DESCRIPTION%}/g, product.description);
-  output = output.replace(/{%ID%}/g, product.id);
-
-  if (!product.organic)
-    output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
-  return output;
-};
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   'utf-8'
