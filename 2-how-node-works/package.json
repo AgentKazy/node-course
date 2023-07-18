@@ -1,0 +1,11 @@
+{
+  "name": "how-node-works",
+  "version": "1.0.0",
+  "description": "",
+  "main": "EventLoop.js",
+  "scripts": {
+    "start": "set UV_THREADPOOL_SIZE=3& node EventLoop.js"
+  },
+  "author": "Bruno Martins",
+  "license": "ISC"
+}
