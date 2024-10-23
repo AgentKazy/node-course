@@ -8,3 +8,7 @@ Which updates are accepted?
 * - All versions (Major, Minor & Patch)
 ^ - Minor & Patch
 ~ - Only Patch 
+
+---
+
+.prettierrc to configure Prettier: https://prettier.io/docs/en/options
