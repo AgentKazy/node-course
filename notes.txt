@@ -1,0 +1,10 @@
+v1.2.3
+
+1 - Major (new release with breaking changes)
+2 - Minor (new release without breaking changes)
+3 - Patch (bug fixes)
+
+Which updates are accepted?
+* - All versions (Major, Minor & Patch)
+^ - Minor & Patch
+~ - Only Patch 
