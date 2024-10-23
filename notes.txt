@@ -12,3 +12,24 @@ Which updates are accepted?
 ---
 
 .prettierrc to configure Prettier: https://prettier.io/docs/en/options
+
+---
+
+> Event loop (what makes async processing possible in Node.js)
+
+>> START --> Expired timer callbacks --> I/O (input/output) polling and callbacks --> setImmediate callbacks --> (NOT IMPORTANT) Close callbacks
+
+>> process.nexttick() queue & other microtasks queue (both between phases)
+
+>> Any pending timers or I/O tasks?:
+-->  NO --> Exit program
+--> YES --> Back to the top of the event loop
+
+>> DON'T BLOCK
+- Don't use sync versions of functions in fs, crypto and zlib modules in callbacks
+- Don't perform complex calculations (e.g. loops inside loops)
+- Be careful with JSON in large objects
+- Don't use too complex regular expressions (e.g. nested quantifiers)
+
+---
+
