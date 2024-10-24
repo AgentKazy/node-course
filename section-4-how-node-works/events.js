@@ -1,7 +1,7 @@
-const eventEmitter = require("node:events");
+const EventEmitter = require("node:events");
 const http = require("node:http");
 
-class Sales extends eventEmitter {
+class Sales extends EventEmitter {
   constructor() {
     super();
   }
