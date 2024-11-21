@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// 2) ROUTE HANDLERS
+// 2) ROUTE HANDLERS - TOURS
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
@@ -108,6 +108,7 @@ const deleteTour = (req, res) => {
   });
 };
 
+// USERS
 const getAllUsers = (req, res) => {
   res.status(500).json({
     status: 'error',
@@ -144,21 +145,17 @@ const deleteUser = (req, res) => {
 };
 
 // 3) ROUTES
-app.route('/api/v1/tours').get(getAllTours).post(createTour);
+const tourRouter = express.Router();
+const userRouter = express.Router();
 
-app
-  .route('/api/v1/tours/:id')
-  .get(getTour)
-  .patch(updateTour)
-  .delete(deleteTour);
+tourRouter.route('/').get(getAllTours).post(createTour);
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
-app.route('/api/v1/users').get(getAllUsers).post(createUser);
+userRouter.route('/').get(getAllUsers).post(createUser);
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 
-app
-  .route('/api/v1/users/:id')
-  .get(getUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
 
 // 4) START SERVER
 const port = 3000;
